@@ -1,0 +1,15 @@
+{
+	"name": "df-ucb-ssdg77404210",
+	"properties": {
+		"trustModeClaimForMi": {
+			"value": "Disabled",
+			"editable": true
+		}
+	},
+	"location": "chilecentral",
+	"identity": {
+		"type": "SystemAssigned",
+		"principalId": "c19977f7-085a-4d20-baf1-bab74f3de2c6",
+		"tenantId": "cc28633f-12b8-46cb-bc15-951dae239b4d"
+	}
+}
