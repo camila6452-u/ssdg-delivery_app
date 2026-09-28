@@ -27,6 +27,9 @@
 				},
 				{
 					"name": "split1"
+				},
+				{
+					"name": "aggregate1"
 				}
 			],
 			"scriptLines": [
@@ -47,7 +50,13 @@
 				"          fecha_alta = toDate(fecha_alta)) ~> derivedColumn1",
 				"derivedColumn1 split(!isNull(repartidor_id)&&!isNull(tipo_vehiculo)&&!isNull(ciudad_base),",
 				"     disjoint: false) ~> split1@(valido, rechazado)",
-				"split1@valido sink(allowSchemaDrift: true,",
+				"split1@valido aggregate(groupBy(nombre_repartidor),",
+				"     repartidor_id = last(repartidor_id),",
+				"          tipo_vehiculo = last(tipo_vehiculo),",
+				"          ciudad_base = last(ciudad_base),",
+				"          fecha_alta = last(fecha_alta),",
+				"          activo = last(activo)) ~> aggregate1",
+				"aggregate1 sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
 				"     input(",
 				"          repartidor_id as string,",
