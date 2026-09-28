@@ -44,7 +44,7 @@
 				"source1 derive(fecha_pago = toDate(fecha_pago),",
 				"          metodo_pago = initCap(lower(trim(metodo_pago))),",
 				"          estado_pago = initCap(lower(trim(estado_pago))),",
-				"          monto_pagado = toDecimal(monto_pagado)) ~> derivedColumn1",
+				"          monto_pagado = toDecimal(replace(replace(trim(monto_pagado),\",\",\".\"),\"Bs \",\"\"))) ~> derivedColumn1",
 				"derivedColumn1 split(ERROR_FUNCTION('!isNull(pago_id)&&!isNull(pedido_id)&&!isNull(monto_pagado)&&>0'),",
 				"     disjoint: false) ~> split1@(valido, rechazado)",
 				"split1@valido sink(allowSchemaDrift: true,",
