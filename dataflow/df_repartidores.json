@@ -73,7 +73,14 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          repartidor_id,",
+				"          nombre_repartidor,",
+				"          tipo_vehiculo,",
+				"          ciudad_base,",
+				"          fecha_alta",
+				"     )) ~> sink1"
 			]
 		}
 	}

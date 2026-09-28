@@ -45,7 +45,7 @@
 				"          metodo_pago = initCap(lower(trim(metodo_pago))),",
 				"          estado_pago = initCap(lower(trim(estado_pago))),",
 				"          monto_pagado = toDecimal(replace(replace(trim(monto_pagado),\",\",\".\"),\"Bs \",\"\"))) ~> derivedColumn1",
-				"derivedColumn1 split(ERROR_FUNCTION('!isNull(pago_id)&&!isNull(pedido_id)&&!isNull(monto_pagado)&&>0'),",
+				"derivedColumn1 split(!isNull(pago_id)&&!isNull(pedido_id)&&!isNull(monto_pagado)&&monto_pagado>0,",
 				"     disjoint: false) ~> split1@(valido, rechazado)",
 				"split1@valido sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
@@ -64,7 +64,15 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          pago_id,",
+				"          pedido_id,",
+				"          fecha_pago,",
+				"          metodo_pago,",
+				"          estado_pago,",
+				"          monto_pagado",
+				"     )) ~> sink1"
 			]
 		}
 	}

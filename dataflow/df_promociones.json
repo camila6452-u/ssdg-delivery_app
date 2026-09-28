@@ -65,7 +65,15 @@
 				"     format: 'table',",
 				"     skipDuplicateMapInputs: true,",
 				"     skipDuplicateMapOutputs: true,",
-				"     errorHandlingOption: 'stopOnFirstError') ~> sink1"
+				"     errorHandlingOption: 'stopOnFirstError',",
+				"     mapColumn(",
+				"          promocion_id,",
+				"          nombre_promocion,",
+				"          fecha_inicio,",
+				"          fecha_fin,",
+				"          porcentaje_descuento,",
+				"          canal_aplicable",
+				"     )) ~> sink1"
 			]
 		}
 	}
