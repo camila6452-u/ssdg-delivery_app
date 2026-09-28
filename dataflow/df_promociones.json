@@ -46,7 +46,7 @@
 				"          porcentaje_descuento = toInteger(trim(porcentaje_descuento)),",
 				"          fecha_fin = toDate(fecha_fin),",
 				"          fecha_inicio = toDate(fecha_inicio)) ~> derivedColumn1",
-				"derivedColumn1 split(!isNull(promocion_id)&&!isNull(nombre_promocion)&&!isNull(fecha_inicio)&&!isNull(fecha_fin)&&!isNull(porcentaje_descuento)&&!isNull(canal_aplicable),",
+				"derivedColumn1 split(!isNull(promocion_id)&&!isNull(nombre_promocion)&&!isNull(fecha_inicio)&&!isNull(fecha_fin)&&!isNull(porcentaje_descuento)&&porcentaje_descuento<=100&&!isNull(canal_aplicable),",
 				"     disjoint: false) ~> split1@(valido, rechazado)",
 				"split1@valido sink(allowSchemaDrift: true,",
 				"     validateSchema: false,",
